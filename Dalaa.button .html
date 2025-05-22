@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>زر الإنذار</title>
+  <style>
+    body {
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #myButton {
+      background-color: red;
+      color: white;
+      border: none;
+      width: 100px;
+      height: 100px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<button id="myButton">اضغطني</button>
+
+<audio id="alertSound" src="https://cdn.fesliyanstudios.com/mp3/4386.mp3" preload="auto"></audio>
+
+<script>
+  const button = document.getElementById('myButton');
+  const alertSound = document.getElementById('alertSound');
+  let timer = null;
+  let timeLeft = 8;
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 8;
+    document.body.style.backgroundColor = 'yellow';
+
+    timer = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.body.style.backgroundColor = 'white';
+        alertSound.play();
+      }
+    }, 1000);
+  }
+
+  button.addEventListener('click', () => {
+    startTimer();
+  });
+</script>
+
+</body>
+</html>
